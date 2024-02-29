@@ -68,9 +68,16 @@ int main(int argc, char const *argv[]) {
     char *name = subString(buffer, 0, indexChar);
     char *echomsg = subString(buffer, indexChar + 1, strlen(buffer));
 
+    char logFile[1024] = { 0 };
+
+    strcat(logFile, name);
+    strcat(logFile, ": ");
+    strcat(logFile, echomsg);
+
     // write massge to file
     FILE *fptr = fopen("echo.txt", "a+");
-    fprintf(fptr, "%s: %s\n", name, echomsg);
+    // fprintf(fptr, "%s: %s\n", name, echomsg);
+    fprintf(fptr, "%s\n", logFile);
     fclose(fptr);
 
     // send echo massge back to client
@@ -80,6 +87,7 @@ int main(int argc, char const *argv[]) {
     // printf("In Comeing msg: %s\n", buffer);
     // printf("Name: %s\n", name);
     // printf("Echo: %s\n", echomsg);
+    // printf("LOG file: %s\n", logFile);
 
     // deallocate
     free(name);
